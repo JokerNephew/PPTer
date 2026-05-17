@@ -5,6 +5,8 @@ const USER_AGENT =
   "Mozilla/5.0 (compatible; AI-PPT-Studio/1.0; +https://localhost)";
 const MAX_RESULTS_PER_SOURCE = 80;
 const MAX_PAGES_PER_SOURCE = 6;
+const DEFAULT_PAGE_SIZE = 12;
+const MAX_PAGE_SIZE = 24;
 
 interface SearchSourceResult {
   name: ExternalTemplateSource;
@@ -467,12 +469,26 @@ async function fetchSource(source: SourceConfig, query: string): Promise<SearchS
 }
 
 export async function searchExternalTemplates(query: string) {
+  return searchExternalTemplatesPage(query, 1, DEFAULT_PAGE_SIZE);
+}
+
+export async function searchExternalTemplatesPage(query: string, page = 1, pageSize = DEFAULT_PAGE_SIZE) {
   const preparedQuery = prepareSearchQuery(query);
+  const safePage = Math.max(1, Math.floor(page));
+  const safePageSize = Math.min(MAX_PAGE_SIZE, Math.max(1, Math.floor(pageSize)));
 
   if (!preparedQuery.searchQuery) {
     return {
       query: preparedQuery.originalQuery,
       results: [],
+      pagination: {
+        page: safePage,
+        pageSize: safePageSize,
+        total: 0,
+        totalPages: 0,
+        hasNextPage: false,
+        hasPreviousPage: false,
+      },
       sources: sources.map(({ name }) => ({
         name,
         status: "ok" as const,
@@ -486,11 +502,24 @@ export async function searchExternalTemplates(query: string) {
     settled.flatMap((source) => source.results),
     preparedQuery.relevanceTerms,
   );
+  const total = results.length;
+  const totalPages = Math.ceil(total / safePageSize);
+  const currentPage = totalPages ? Math.min(safePage, totalPages) : 1;
+  const start = (currentPage - 1) * safePageSize;
+  const pagedResults = results.slice(start, start + safePageSize);
 
   return {
     query: preparedQuery.originalQuery,
     searchQuery: preparedQuery.searchQuery,
-    results,
+    results: pagedResults,
+    pagination: {
+      page: currentPage,
+      pageSize: safePageSize,
+      total,
+      totalPages,
+      hasNextPage: currentPage < totalPages,
+      hasPreviousPage: currentPage > 1 && totalPages > 0,
+    },
     sources: settled.map(({ name, status, message }) => ({ name, status, message })),
   };
 }

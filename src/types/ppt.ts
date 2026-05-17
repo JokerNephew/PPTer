@@ -86,7 +86,16 @@ export interface ExternalTemplateResult {
 
 export interface TemplateSearchResponse {
   query: string;
+  searchQuery?: string;
   results: ExternalTemplateResult[];
+  pagination: {
+    page: number;
+    pageSize: number;
+    total: number;
+    totalPages: number;
+    hasNextPage: boolean;
+    hasPreviousPage: boolean;
+  };
   sources: Array<{
     name: ExternalTemplateSource;
     status: "ok" | "error";
