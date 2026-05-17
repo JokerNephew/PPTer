@@ -1,0 +1,200 @@
+@import "tailwindcss";
+
+:root {
+  --background: #eef2f5;
+  --foreground: #111827;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), "Microsoft YaHei", sans-serif;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.56;
+}
+
+.field {
+  @apply mt-1 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 outline-none transition focus:border-[#0f766e] focus:ring-2 focus:ring-[#0f766e]/15;
+}
+
+.primary-button {
+  @apply inline-flex items-center justify-center gap-2 rounded-md bg-[#102820] px-3 py-2.5 text-sm font-semibold text-white transition hover:bg-[#173c30] disabled:hover:bg-[#102820];
+}
+
+.secondary-button {
+  @apply inline-flex items-center justify-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-2.5 text-sm font-semibold text-slate-800 transition hover:border-slate-300 hover:bg-slate-50;
+}
+
+.tool-button {
+  @apply inline-flex items-center justify-center gap-2 rounded-md border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50;
+}
+
+.icon-button {
+  @apply inline-flex h-9 w-9 items-center justify-center rounded-md border border-slate-200 bg-white text-slate-600 transition hover:border-slate-300 hover:bg-slate-50;
+}
+
+.template-row {
+  @apply mb-2 flex w-full items-center gap-3 rounded-md border border-slate-200 bg-white p-2 text-left transition hover:border-slate-300 hover:bg-slate-50;
+}
+
+.template-row-active {
+  @apply border-[#0f766e] bg-[#eefaf6];
+}
+
+.template-preview {
+  @apply h-11 w-16 shrink-0 rounded border border-white shadow-sm;
+}
+
+.template-library-button {
+  @apply mb-4 flex w-full items-center gap-3 rounded-md border border-slate-200 bg-slate-50 p-3 transition hover:border-slate-300 hover:bg-white;
+}
+
+.template-library-overlay {
+  @apply fixed inset-0 z-50 bg-slate-950/52 p-3 backdrop-blur-sm md:p-6;
+}
+
+.template-library-modal {
+  @apply mx-auto flex h-full max-w-7xl flex-col overflow-hidden rounded-md border border-slate-200 bg-white shadow-2xl;
+}
+
+.template-library-header {
+  @apply flex items-start justify-between gap-4 border-b border-slate-200 bg-white px-4 py-4 md:px-6;
+}
+
+.template-library-search {
+  @apply flex flex-col gap-3 border-b border-slate-200 bg-slate-50 px-4 py-4 md:flex-row md:px-6;
+}
+
+.template-library-search-input {
+  @apply w-full rounded-md border border-slate-200 bg-white py-3 pl-9 pr-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#0f766e] focus:ring-2 focus:ring-[#0f766e]/15;
+}
+
+.template-library-toolbar {
+  @apply flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 bg-white px-4 py-3 text-xs font-medium text-slate-500 md:px-6;
+}
+
+.template-library-results {
+  @apply min-h-0 flex-1 overflow-y-auto bg-[#eef2f5] p-4 md:p-6;
+}
+
+.template-library-grid {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr));
+  @apply grid gap-4;
+}
+
+.template-library-empty {
+  @apply flex min-h-[360px] flex-col items-center justify-center rounded-md border border-dashed border-slate-300 bg-white p-8 text-center;
+}
+
+.external-template-card {
+  @apply flex gap-3 rounded-md border border-slate-200 bg-white p-3 text-left shadow-sm transition hover:border-slate-300 hover:shadow-md;
+}
+
+.external-template-card-compact {
+  @apply p-2.5;
+}
+
+.external-template-thumb {
+  @apply flex aspect-video w-32 shrink-0 items-center justify-center overflow-hidden rounded border border-slate-200 bg-slate-100 text-[11px] font-semibold text-slate-400;
+}
+
+.external-template-thumb img {
+  @apply h-full w-full object-cover;
+}
+
+.external-source-badge {
+  @apply shrink-0 rounded border border-slate-200 bg-slate-50 px-1.5 py-0.5 text-[10px] font-semibold text-slate-500;
+}
+
+.external-meta-pill {
+  @apply rounded border border-slate-200 bg-slate-50 px-1.5 py-0.5;
+}
+
+.preview-shell {
+  @apply relative mx-auto flex aspect-video w-full max-w-5xl overflow-hidden rounded-md;
+}
+
+.thumb {
+  @apply flex min-h-16 w-full flex-col gap-1 rounded-md border border-slate-200 bg-white p-2 transition hover:border-slate-300 hover:bg-slate-50;
+}
+
+.thumb-active {
+  @apply border-[#0f766e] bg-[#eefaf6];
+}
+
+.outline-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+  @apply grid gap-4;
+}
+
+.outline-card {
+  @apply rounded-md border border-slate-200 bg-slate-50/60 p-4 transition hover:border-slate-300 hover:bg-white;
+}
+
+.outline-index {
+  @apply flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-[#102820] text-sm font-semibold text-white;
+}
+
+.outline-title-input {
+  @apply min-w-0 w-full rounded-md border border-transparent bg-transparent px-2 py-1 text-lg font-semibold leading-snug text-slate-950 outline-none transition focus:border-[#0f766e] focus:bg-white focus:ring-2 focus:ring-[#0f766e]/15;
+}
+
+.outline-field-label {
+  @apply mb-1.5 block text-xs font-semibold text-slate-500;
+}
+
+.outline-textarea {
+  @apply w-full resize-y rounded-md border border-slate-200 bg-white px-3 py-2.5 text-sm leading-6 text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-[#0f766e] focus:ring-2 focus:ring-[#0f766e]/15;
+}
+
+.outline-empty {
+  @apply rounded-md border border-dashed border-slate-300 bg-slate-50 p-8 text-center text-sm font-medium text-slate-500;
+}
+
+.segmented {
+  @apply rounded-md border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-50;
+}
+
+.segmented-active {
+  @apply border-[#102820] bg-[#102820] text-white hover:bg-[#102820];
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@media (max-width: 1023px) {
+  .preview-shell {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .external-template-card {
+    @apply flex-col;
+  }
+
+  .external-template-thumb {
+    @apply w-full;
+  }
+}
